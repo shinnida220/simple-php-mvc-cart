@@ -49,20 +49,16 @@
 	        <div class="row">
 	        	<div class="mx-auto col-md-8 mb-4">
 				    <h4 class="d-flex justify-content-between align-items-center mb-3">
-				        <span class="text-muted">Your cart</span>
-				        <span class="">Balance: USD 100</span>
+				        <span class="text-muted">Items Selected</span>
+				        <span class="">Balance: <span id="user-balance"></span></span>
 				    </h4>
 				    
-				    <div class="mb-4" id="cart-area"></div>
+				    <div class="mb-4" id="checkout-area"></div>
 
 					<div class="text-center">
-						<a href="/" class="btn btn-primary">Continue Shopping</a> 
+						<a href="/" class="btn btn-primary">Continue Shopping</a>
 						&nbsp;
-						<button type="button" class="btn btn-danger" id="btn-empty-cart" disabled="disabled">Empty Cart</button>
-						&nbsp;
-						<button type="button" class="btn btn-info" id="btn-update-cart" disabled="disabled">Update Cart</button>
-						&nbsp;
-						<a href="/cart/checkout" class="btn btn-success">Checkout</a>
+						<button type="button" class="btn btn-success">Pay</a>
 					</div>
     			</div>
 	        </div>
@@ -75,6 +71,7 @@
 	<script type="text/javascript" src="/js/cart.js"></script>
 	<script type="text/javascript">
 		var products = <?= json_encode($products); ?>;
+		var deliveryMethods = <?= json_encode($deliveryMethods); ?>;
 	</script>
 	<script type="text/javascript" src="/js/main.js"></script>
 </body>

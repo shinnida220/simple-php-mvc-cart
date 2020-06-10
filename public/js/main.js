@@ -34,6 +34,10 @@ $(document).ready(function(){
     $('#cart-area').html( displayCart() );
     enableDisableCartBtns();
   }
+  else if($('#checkout-area').length >0)
+  {
+    $('#checkout-area').html( displayCheckout() );
+  }
 
   $('#user-balance').html(Cart.currency+''+User.getBalance());
 });
@@ -104,7 +108,7 @@ function displayCart()
   {
     for(var i = 0; i<= numberOfItems-1; i++)
     {
-      rowHtml += getRowHtml(cartItems[i], i);
+      rowHtml += getRowHtml(cartItems[i], i, true);
     }
 
     rowHtml += 
@@ -149,7 +153,7 @@ function getProduct(id)
   }
 }
 
-function getRowHtml(item, index)
+function getRowHtml(item, index, showInputBox)
 {
   var html = 
     '<tr>' + 
@@ -159,10 +163,76 @@ function getRowHtml(item, index)
         '<b>'+item.label +'</b>'+ 
       '</td>' +
       '<td width="10%">' + 
-        '<input type="number" width="50" name="qty" value="'+item.quantity +'" min="0" rel="'+ item.id+'" class="form-control form-control-sm" />' +
+        (
+          (showInputBox === true) ? 
+          '<input type="number" width="50" name="qty" value="'+item.quantity +'" min="0" rel="'+ item.id+'" class="form-control form-control-sm" />' :
+          item.quantity
+        )
+        +
       '</td>' + 
       '<td>' + Cart.currency + '' + item.price + '</td>' +
       '<td>' + Cart.displayPrice(item.price * item.quantity) + '</td>' +
     '</tr>';
   return html;
+}
+
+
+function displayCheckout()
+{
+  var cartItems = Cart.getAllItems();
+  var html = '';
+  var headerHtml = 
+    '  <tr>' +
+        '<th scope="col">#</th>' +
+        '<th scope="col">Item</th>' +
+        '<th scope="col">Quantity</th>' +
+        '<th scope="col">Price</th>' +
+        '<th scope="col">Sub-Total</th>' +
+    '  </tr>';
+  var emptyHtml = 
+    '  <tr>' +
+        '<th scope="col" colspan="5" align="center"> <div class="text-center">Your cart is empty.</div> </th>' +
+    '  </tr>';
+
+  var numberOfItems = cartItems.length;
+  var rowHtml = '';
+
+  if (numberOfItems > 0)
+  {
+    for(var i = 0; i<= numberOfItems-1; i++)
+    {
+      rowHtml += getRowHtml(cartItems[i], i, false);
+    }
+
+    // then lets show shipping info
+
+    rowHtml += 
+      '<tr>' + 
+        '<th scope="row"></th>' + 
+        '<td>&nbsp;</td>' +
+        '<td width="10%"align="right">Total</td>' + 
+        '<td>'+ Cart.displayPrice(Cart.subTotal()) +'</td>' + 
+        '<td> </td>' + 
+      '</tr>'; 
+  }
+  else
+  {
+    rowHtml = emptyHtml;
+  }
+
+  html = 
+    '<table class="table table-striped">' +
+      '<thead>' +
+        '<tr>' +
+          '<th scope="col">#</th>' +
+          '<th scope="col">Item</th>' +
+          '<th scope="col">Quantity</th>' +
+          '<th scope="col">Price</th>' +
+          '<th scope="col">Sub-Total</th>' +
+        '</tr>' +
+      '</thead>' +
+      '<tbody>' + rowHtml + '</tbody>' +
+    '</table>';
+
+  return html; 
 }

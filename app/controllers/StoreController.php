@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Product;
+use App\Models\DeliveryMethod;
 
 class StoreController extends Controller
 {
@@ -20,7 +21,11 @@ class StoreController extends Controller
 
 	public function checkout()
 	{
-
+		$products = (new Product)->getProductsWithRatings();
+		$deliveryMethods = json_encode(
+			(new DeliveryMethod())->all()
+		);
+		$this->view('store/checkout', ['products' => $products, 'deliveryMethods' => $deliveryMethods]);
 	}
 
 	public function orderdetails()
