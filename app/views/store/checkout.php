@@ -8,35 +8,7 @@
 	<link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-	<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
-	    <div class="container">
-	        <a class="navbar-brand" href="/">Mini eCommerce Shop</a>
-	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-	            <span class="navbar-toggler-icon"></span>
-	        </button>
-
-	        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-	            <ul class="navbar-nav m-auto">
-	                <li class="nav-item m-auto">
-	                    <a class="nav-link" href="/">Home</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" href="/shop/cart">Cart</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" href="/shop/checkout">Checkout</a>
-	                </li>
-	            </ul>
-
-	            <form class="form-inline my-2 my-lg-0">
-	                <a class="btn btn-primary btn-sm ml-3" href="/shop/cart">
-	                    <i class="fa fa-shopping-cart"></i> Cart
-	                    <span class="badge badge-light" id="cart-item-count">0</span>
-	                </a>
-	            </form>
-	        </div>
-	    </div>
-	</nav>
+	<?php require_once ROOT.DS.'app'.DS.'views'.DS.'elements'.DS.'header.php'; ?>
 
 	<section class="our-publication pt-100 pb-70">
 	    <div class="container">
@@ -58,7 +30,7 @@
 					<div class="text-center">
 						<a href="/" class="btn btn-primary">Continue Shopping</a>
 						&nbsp;
-						<button type="button" class="btn btn-success">Pay</a>
+						<button type="button" class="btn btn-success" onclick="processOrder();">Pay</a>
 					</div>
     			</div>
 	        </div>
@@ -74,5 +46,15 @@
 		var deliveryMethods = <?= $deliveryMethods; ?>;
 	</script>
 	<script type="text/javascript" src="/js/main.js"></script>
+
+	<div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  	<div class="modal-dialog modal-dialog-centered" role="document">
+	   	 	<div class="modal-content">
+			    <div class="modal-body" style="background:#2c3e50;">
+			        <div class="loader">Loading...</div>
+			    </div>
+	    	</div>
+	  	</div>
+	</div>
 </body>
 </html>

@@ -4,9 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-	/**
-     * The contact_groups that belong to this user.
-     */
+
     public function ratings()
     {
         return $this->hasMany('App\Models\Rating')->get();

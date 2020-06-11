@@ -8,35 +8,7 @@
 	<link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-	<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
-	    <div class="container">
-	        <a class="navbar-brand" href="/">Mini eCommerce Shop</a>
-	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-	            <span class="navbar-toggler-icon"></span>
-	        </button>
-
-	        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-	            <ul class="navbar-nav m-auto">
-	                <li class="nav-item m-auto">
-	                    <a class="nav-link" href="/">Home</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" href="/shop/cart">Cart</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" href="/shop/checkout">Checkout</a>
-	                </li>
-	            </ul>
-
-	            <form class="form-inline my-2 my-lg-0">
-	                <a class="btn btn-primary btn-sm ml-3" href="/shop/cart">
-	                    <i class="fa fa-shopping-cart"></i> Cart
-	                    <span class="badge badge-light" id="cart-item-count">0</span>
-	                </a>
-	            </form>
-	        </div>
-	    </div>
-	</nav>
+	<?php require_once ROOT.DS.'app'.DS.'views'.DS.'elements'.DS.'header.php'; ?>
 
 	<section class="our-publication pt-100 pb-70">
 	    <div class="container">
@@ -62,7 +34,7 @@
 						&nbsp;
 						<button type="button" class="btn btn-info" id="btn-update-cart" disabled="disabled">Update Cart</button>
 						&nbsp;
-						<a href="/cart/checkout" class="btn btn-success">Checkout</a>
+						<a href="/shop/checkout" class="btn btn-success">Checkout</a>
 					</div>
     			</div>
 	        </div>

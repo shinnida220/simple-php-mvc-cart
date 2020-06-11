@@ -5,34 +5,34 @@ var User = {};
 // User initialization...
 User.init = function() 
 {
-  	var user = localStorage.getItem('user-info');
+  var user = localStorage.getItem('user-info');
 	if (user) 
 	{
-    	User.info = JSON.parse(user);
+    User.info = JSON.parse(user);
 	} 
 	else 
 	{
-    	User.info = User.create();
-    	User.save();
-  	}
+  	User.info = User.create();
+  	User.save();
+	}
 
-  	User.callbacks = {};
-  	return User;
+	User.callbacks = {};
+	return User;
 };
 
 // Save a user detsils save method ... makes use of the localStorage object
 User.save = function() 
 {
 	localStorage.setItem('user-info', JSON.stringify(User.info));
-  	return User;
+  return User;
 };
 
 // Delete a user details method ... 
 User.delete = function() 
 {
 	User.info = {};
-  	User.save();
-  	return User;
+  User.save();
+  return User;
 };
 
 // Create a random user a user details
@@ -46,19 +46,22 @@ User.create = function()
 };
 
 // Add a successful order
-User.saveOrder = function(items) 
+User.saveOrder = function(sOrder) 
 {
 	var order = {}, sum = 0;
 	order.items = [];
 	order.initial_balance = User.info.balance;
 	
-	for (var i=0; i<=items.length-1; i++)
+	for (var i=0; i<=sOrder.items.length-1; i++)
 	{
-		sum += item[i].price * item[i].quantity;
-		order.items.push(items[i]);
+		sum += Math.abs(sOrder.items[i].price) * Math.abs(sOrder.items[i].quantity);
+		order.items.push(sOrder.items[i]);
 	}
 
+  sum += Math.abs(sOrder.shipping);
+
 	order.after_balance = User.info.balance - sum;
+  User.info.orders.push(order);
 
 	User.setBalance(order.after_balance);
 	User.save();
@@ -67,7 +70,7 @@ User.saveOrder = function(items)
 
 User.setBalance = function(balance)
 {
-	User.info.balance = balance;
+	User.info.balance = Math.round((balance + Number.EPSILON) * 100) / 100;
 	User.save();
 	return User;
 }
