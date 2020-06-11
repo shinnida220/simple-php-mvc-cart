@@ -12,14 +12,16 @@ class Controller
 	}
 
 
-	protected function view($view, $data = []){
+	protected function view($view, $data = [])
+	{
 		extract($data);
 		require_once ROOT.DS.'app'.DS.'views'.DS.$view.'.php';
 	}
 
 
 	// Method to check request
-	public function requestMethodIs($requestType){
+	public function requestMethodIs($requestType)
+	{
 		if (!empty($requestType))
 		{
 			if (is_array($requestType))
@@ -36,8 +38,13 @@ class Controller
 	public function getData()
 	{
 		if ($this->requestMethodIs('POST'))
-		{
-			return $_POST;
+		{	
+			$data = $_POST;
+			if(!empty($_FILES))
+			{
+				$data['uploadedFiles'] = $_FILES;
+			}
+			return $data;
 		}
 		else{
 			return $_GET;

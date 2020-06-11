@@ -176,6 +176,37 @@ function getRowHtml(item, index, showInputBox)
   return html;
 }
 
+function getShippingRow()
+{
+  var html = '';
+  if (undefined != deliveryMethods)
+  {
+    if (deliveryMethods.length > 0)
+    {
+      html += 
+        '<tr>' +
+          '<th scope="row"></th>' +
+          '<td>Shipping Cost</td>' +
+          '<td colspan="3">' ;
+
+      for (var i=0; i<=deliveryMethods.length-1; i++)
+      {
+        html += 
+          '<div class="form-check form-check-inline">' + 
+            '<input class="form-check-input deliveryMethods" type="radio" name="deliveryMethod" rel="'+deliveryMethods[i].id+'" value="' + deliveryMethods.price_per_kg +'">' +
+            '<label class="form-check-label">' + deliveryMethods[i].name + ' ('+ ((Math.abs(deliveryMethods[i].price_per_kg) <= 0) ? 'FREE' : (Cart.currency+''+deliveryMethods[i].price_per_kg)) + ') </label>' +
+          '</div> &nbsp;';
+      }
+
+      html += 
+          '</td>' +
+        '</tr>';
+    }
+  }
+
+  return html;
+}
+
 
 function displayCheckout()
 {
@@ -205,13 +236,14 @@ function displayCheckout()
     }
 
     // then lets show shipping info
+    rowHtml += getShippingRow();
 
     rowHtml += 
       '<tr>' + 
         '<th scope="row"></th>' + 
         '<td>&nbsp;</td>' +
         '<td width="10%"align="right">Total</td>' + 
-        '<td>'+ Cart.displayPrice(Cart.subTotal()) +'</td>' + 
+        '<td id="total-price-holder">'+ Cart.displayPrice(Cart.subTotal()) +'</td>' + 
         '<td> </td>' + 
       '</tr>'; 
   }
@@ -235,4 +267,14 @@ function displayCheckout()
     '</table>';
 
   return html; 
+}
+
+function handleShipping(){
+  // Chek the shipping buttons
+  // if free, leave price as is, if not add up to the total cost..
+}
+
+
+function processOrder(){
+  // Show a modal, then submit via ajax
 }

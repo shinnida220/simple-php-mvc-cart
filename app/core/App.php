@@ -29,11 +29,11 @@ class App
 			{
 				$this->action = $url[1];
 			}
-			else{
+			else
+			{
 				die('<h1>404! Page Not Found</h1>');
 				// exit;
 			}
-
 			unset($url[1]);
 		}
 

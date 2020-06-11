@@ -22,10 +22,12 @@ class StoreController extends Controller
 	public function checkout()
 	{
 		$products = (new Product)->getProductsWithRatings();
-		$deliveryMethods = json_encode(
-			(new DeliveryMethod())->all()
-		);
+		$deliveryMethods = json_encode( (new DeliveryMethod())->all());
 		$this->view('store/checkout', ['products' => $products, 'deliveryMethods' => $deliveryMethods]);
+	}
+
+	public function completeOrder(){
+
 	}
 
 	public function orderdetails()

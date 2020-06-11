@@ -71,7 +71,7 @@
 	<script type="text/javascript" src="/js/cart.js"></script>
 	<script type="text/javascript">
 		var products = <?= json_encode($products); ?>;
-		var deliveryMethods = <?= json_encode($deliveryMethods); ?>;
+		var deliveryMethods = <?= $deliveryMethods; ?>;
 	</script>
 	<script type="text/javascript" src="/js/main.js"></script>
 </body>
