@@ -13,7 +13,7 @@ class App
 		$url = $this->parseUrl();
 
 		# If we have a valid controller requested..
-		if (isset($url[0]) && file_exists(ROOT.DS.'app'.DS.'controllers'.DS. ucfirst($url[0]).'Controller.php'))
+		if (isset($url[0]) && !empty($url[0]) && strtoupper($url[0]) != 'CONTROLLLER' && file_exists(ROOT.DS.'app'.DS.'controllers'.DS. ucfirst($url[0]).'Controller.php'))
 		{
 			$this->controller = ucfirst($url[0]).'Controller';
 			unset($url[0]);
@@ -23,7 +23,7 @@ class App
 		$this->controller = new $this->controller;
 
 		# If we have a valid action requested within the controller...
-		if (isset($url[1]) ) 
+		if (isset($url[1]) && !empty($url[1])) 
 		{
 			if (method_exists($this->controller, $url[1]) )
 			{
@@ -52,9 +52,10 @@ class App
 	*/
 	public function parseUrl()
 	{
-		if (isset($_GET['url']))
+		if (isset($_SERVER['REQUEST_URI']))
 		{
-			return explode('/', filter_var( rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL) );
+			$url = str_replace("/index.php", "", $_SERVER['REQUEST_URI']);
+			return explode('/', filter_var( trim($url, '/'), FILTER_SANITIZE_URL) );
 		}
 	}
 }

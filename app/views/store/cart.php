@@ -34,7 +34,7 @@
 						&nbsp;
 						<button type="button" class="btn btn-info" id="btn-update-cart" disabled="disabled">Update Cart</button>
 						&nbsp;
-						<a href="/shop/checkout" class="btn btn-success">Checkout</a>
+						<a href="/index.php/shop/checkout" class="btn btn-success">Checkout</a>
 					</div>
     			</div>
 	        </div>

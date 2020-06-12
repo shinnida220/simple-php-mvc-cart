@@ -23,7 +23,7 @@ class StoreController extends Controller
 	public function checkout()
 	{
 		$products = (new Product)->getProductsWithRatings();
-		$deliveryMethods = json_encode( (new DeliveryMethod())->all());
+		$deliveryMethods = json_encode( (new DeliveryMethod)->all());
 		$this->view('store/checkout', ['products' => $products, 'deliveryMethods' => $deliveryMethods]);
 	}
 
@@ -54,7 +54,7 @@ class StoreController extends Controller
 			]);
 
 			if ($order->save()){
-				$resp = ['status' => true, 'statusMessage' => 'Order Successful.', 'order_url' => '/store/orderdetails/'.$order->order_no];
+				$resp = ['status' => true, 'statusMessage' => 'Order Successful.', 'order_url' => '/index.php/store/orderdetails/'.$order->order_no];
 			}
 			else{
 				$resp['statusMessage'] = 'We could not process your order. Please try again.';

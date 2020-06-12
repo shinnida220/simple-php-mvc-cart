@@ -369,7 +369,7 @@ function processOrder(){
       
 
       // Let's prepare the post data
-      var url = getBaseURL()+'store/completeOrder';
+      var url = getBaseURL()+'/index.php/store/completeOrder';
       var payload = { items: items, user: User.info.id, shipping: shipping.id, balance: User.getBalance() };
       console.log(payload);
       var req = $.post( url, payload );

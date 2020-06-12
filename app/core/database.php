@@ -9,11 +9,22 @@ $capsule->addConnection([
     'host'      => 'localhost',
     'database'  => 'abchost',
     'username'  => 'root',
-    'password'  => '',
+    'password'  => '', 
     'charset'   => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix'    => '',
 ]);
+
+// $capsule->addConnection([
+//     'driver'    => 'mysql',
+//     'host'      => 'mysql.hit.ng',
+//     'database'  => 'nuelibk',
+//     'username'  => 'simplemvc',
+//     'password'  => 'SimpleMVC123$',
+//     'charset'   => 'utf8',
+//     'collation' => 'utf8_unicode_ci',
+//     'prefix'    => '',
+// ]);
 
 // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
 $capsule->bootEloquent();
